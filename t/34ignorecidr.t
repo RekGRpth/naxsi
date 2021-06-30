@@ -14,9 +14,9 @@ run_tests();
 __DATA__
 === TEST 1: IgnoreCIDR defined (no file)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -38,9 +38,9 @@ GET /?a=buibui
 
 === TEST 1.1: IgnoreCIDR request (no file)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -62,9 +62,9 @@ GET /?a=buibui
 
 === TEST 1.2: IgnoreCIDR request with X-Forwarded-For allow (no file) 
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -88,9 +88,9 @@ GET /?a=buibui
 
 === TEST 1.3: IgnoreCIDR request with X-Forwarded-For deny (no file)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -117,9 +117,9 @@ GET /?a=<>
 >>> foobar
 foobar text
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:/foobar" "mz:URL" "s:$TRAVERSAL:4" id:123456;
 --- config
 location / {
@@ -143,9 +143,9 @@ GET /foobar
 >>> foobar
 foobar text
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:/foobar" "mz:URL" "s:$TRAVERSAL:4" id:123456;
 --- config
 location / {

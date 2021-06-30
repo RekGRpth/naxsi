@@ -20,7 +20,7 @@ run_tests();
 __DATA__
 === TEST 1: Basic GET request with no rules, drop
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -46,7 +46,7 @@ GET /?a=buibui
 --- error_code: 412
 === TEST 1.1: Basic GET request with no rules, whitelist the special rule.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- config
 location / {
 	 SecRulesEnabled;

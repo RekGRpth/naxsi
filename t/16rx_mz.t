@@ -12,9 +12,9 @@ __DATA__
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -40,9 +40,9 @@ GET /buixor?bla=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -68,9 +68,9 @@ GET /buixor?bra=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -96,9 +96,9 @@ GET /buixor?aablaaa=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -124,9 +124,9 @@ GET /buixor?aabla=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -152,9 +152,9 @@ GET /buixor?aabla=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -180,9 +180,9 @@ GET /buixor?aablaa=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -208,9 +208,9 @@ GET /buixor?blaa=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -236,9 +236,9 @@ GET /buixor?blaa=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -264,9 +264,9 @@ GET /buixor?ablaa=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -292,9 +292,9 @@ GET /buixor?abla=1999
 >>> buixor
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -321,9 +321,9 @@ GET /buixor?bla=1999
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -350,9 +350,9 @@ GET /foo?bla=1999
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -378,9 +378,9 @@ GET /foz?bla=1999
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -406,9 +406,9 @@ GET /foo?blaz=1999
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -435,9 +435,9 @@ GET /foo?19991999=foo
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -464,9 +464,9 @@ GET /foo?foo=1999
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS|URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -492,9 +492,9 @@ GET /foo_1999_?x=x
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS|URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -520,9 +520,9 @@ GET /?foo_1999_inject=x
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:1999" "msg:foobar test pattern #1" "mz:ARGS|URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -549,9 +549,9 @@ GET /?foo_1999_inject=x
 >>> foo
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:abcd" "msg:foobar test pattern #1" "mz:ARGS|URL" "s:$SQL:42" id:1999;
 --- config
 location / {

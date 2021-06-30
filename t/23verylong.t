@@ -20,9 +20,9 @@ run_tests();
 __DATA__
 === TEST 1: very long url (exception in url)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -44,9 +44,9 @@ GET /RJyIdIFfpCvCmE3FCglyolhQpjAFGPqj/GHMjmX551MaZ703Zgik2hfRuJABMShON/Z5wR2X5bF
 
 === TEST 1.1: very long get varname (exception in content)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -68,9 +68,9 @@ GET /x?RJyIdIFfpCvCmE3FCglyolhQpjAFGPqj/GHMjmX551MaZ703Zgik2hfRuJABMShON/Z5wR2X5
 
 === TEST 1.2: very long get varname (exception in varname)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -92,9 +92,9 @@ GET /x?RJyIdIFfpCvCmE3FCglyolhQpjAFGPqj/GHMjmX551MaZ703Zgik2hfRuJABMShON/Z5wR2X5
 
 === TEST 1.3: very long content get varname (exception in content)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -117,9 +117,9 @@ GET /x?lol=RJyIdIFfpCvCmE3FCglyolhQpjAFGPqj/GHMjmX551MaZ703Zgik2hfRuJABMShON/Z5w
 
 === TEST 1.4: very long header varname (exception in content)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -145,9 +145,9 @@ GET /x?lol=RJyIdIFfpCvCmE3FCglyolhQpjAFGPqj/GHMjmX551MaZ703Zgik2hfRuJABMShON/Z5w
 
 === TEST 1.5-1: test very long post (url-encoded) - legit
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
          #LearningMode;
@@ -174,9 +174,9 @@ foAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 === TEST 1.6: test very long post (url-encoded) - in var_name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
          #LearningMode;
@@ -203,9 +203,9 @@ foAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 === TEST 1.7: test very long post (url-encoded) - legit (var content)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
          #LearningMode;
@@ -232,9 +232,9 @@ x=foAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 === TEST 1.8: test very long post (url-encoded) - trigger (var content)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
          #LearningMode;

@@ -20,9 +20,9 @@ run_tests();
 __DATA__
 === TEST 1: rule target body|name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -52,9 +52,9 @@ use URI::Escape;
 
 === TEST 1: rule target body|name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -85,9 +85,9 @@ use URI::Escape;
 
 === TEST 1: rule target body|name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;

@@ -14,9 +14,9 @@ run_tests();
 __DATA__
 === TEST 1: IgnoreIP defined
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -38,9 +38,9 @@ GET /?a=buibui
 
 === TEST 1.1: IgnoreIP request 
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -62,9 +62,9 @@ GET /?a=buibui
 
 === TEST 1.2: IgnoreIP request with X-Forwarded-For allow (ipv4) 
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -88,9 +88,9 @@ GET /?a=buibui
 
 === TEST 1.3: IgnoreIP request with X-Forwarded-For allow (ipv6)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -114,9 +114,9 @@ GET /?a=buibui
 
 === TEST 1.4: IgnoreIP request with X-Forwarded-For deny (ipv4)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -140,9 +140,9 @@ GET /?a=<>
 
 === TEST 1.5: IgnoreIP request with X-Forwarded-For deny (ipv6)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -166,9 +166,9 @@ GET /?a=<>
 
 === TEST 1.6: Multiple IgnoreIP defined
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
      SecRulesEnabled;
@@ -197,9 +197,9 @@ GET /?a=buibui
 >>> foobar
 foobar text
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:/foobar" "mz:URL" "s:$TRAVERSAL:4" id:123456;
 --- config
 location / {

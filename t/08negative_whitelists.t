@@ -18,9 +18,9 @@ __DATA__
 
 === WL TEST 1.0
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "str:foobar" "msg:foobar test pattern" "mz:$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -43,9 +43,9 @@ GET /?b=toto
 
 === WL TEST 1.01
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "str:foobar" "msg:foobar test pattern" "mz:$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -68,9 +68,9 @@ GET /?b=foobar
 
 === WL TEST 1.03
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "str:foobar" "msg:foobar test pattern" "mz:$URL:/|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -93,9 +93,9 @@ GET /a?b=foobar
 
 === WL TEST 1.04
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "str:foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -120,9 +120,9 @@ GET /a?b=foobrar
 
 === WL TEST 2.0
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -147,9 +147,9 @@ GET /a?b=foobrar
 
 === WL TEST 2.01
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -173,9 +173,9 @@ GET /a?b=foobar
 
 === WL TEST 2.02
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -198,9 +198,9 @@ GET /?b=foobar
 
 === WL TEST 2.03
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -227,9 +227,9 @@ GET /a?b=rfoobar
 
 === WL TEST 2.04
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^foobar" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -257,9 +257,9 @@ GET /a?b=foobar
 
 === WL TEST 2.05
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^foobar$" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -286,9 +286,9 @@ GET /a?b=foobar
 
 === WL TEST 2.06
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^foobar$" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -315,9 +315,9 @@ GET /a?b=foobara
 
 === WL TEST 2.07
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^[0-9]+$" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -342,9 +342,9 @@ GET /a?b=foobara
 
 === WL TEST 2.08
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:^[0-9]+$" "msg:foobar test pattern" "mz:$URL:/a|$ARGS_VAR:b" "s:$SQL:42" id:1999;
 --- config
 location / {

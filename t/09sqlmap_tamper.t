@@ -15,9 +15,9 @@ __DATA__
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
  location / {
 	 #LearningMode;
@@ -45,9 +45,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -75,9 +75,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -105,9 +105,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -135,9 +135,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -165,9 +165,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -195,9 +195,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -225,9 +225,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -255,9 +255,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -285,9 +285,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
  location / {
 	 #LearningMode;
@@ -315,9 +315,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -345,9 +345,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -375,9 +375,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -405,9 +405,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -435,9 +435,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -465,9 +465,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -495,9 +495,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -525,9 +525,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -555,9 +555,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -585,9 +585,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -615,9 +615,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -645,9 +645,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -675,9 +675,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -705,9 +705,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -735,9 +735,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -765,9 +765,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -796,9 +796,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -826,9 +826,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -856,9 +856,9 @@ location /RequestDenied {
 working_directory /tmp/;
 worker_rlimit_core 25M;
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;

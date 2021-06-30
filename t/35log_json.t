@@ -18,9 +18,9 @@ run_tests();
 __DATA__
 === TEST 1: JSON log quote escape
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -45,9 +45,9 @@ qr@"uri\":\"/\\\"a"@
 
 === TEST 1.1: JSON log backslash escape
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -72,9 +72,9 @@ qr@"uri\":\"/\\\\\\\\a"@
 
 === TEST 1.2: JSON log backslash and quote escape
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -99,9 +99,9 @@ qr@"uri"\:"\/\\"\\\\a"@
 
 === TEST 1.3: Truncated JSON log
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -124,9 +124,9 @@ location /RequestDenied {
 
 === TEST 1.4: Truncated JSON log escaped quote
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -150,9 +150,9 @@ location /RequestDenied {
 
 === TEST 1.5: Truncated JSON log escaped backslash
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {
@@ -176,9 +176,9 @@ location /RequestDenied {
 
 === TEST 1.6: Truncated JSON log escaped quote and backslash
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_json_log 1;
 location / {

@@ -20,9 +20,9 @@ run_tests();
 __DATA__
 === TEST 1.0: Basic GET request, with allow rule (useless, just for coverage. ALLOW should be killed)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:ARGS" "s:$TEST:42";
 #MainRule id:4242 "str:XXX" "s:$SQL:8" "mz:ARGS";
 --- config
@@ -47,9 +47,9 @@ GET /?a=ratataXXX
 --- error_code: 200
 === TEST 1.1: Basic GET request, with global score increase
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:ARGS" "s:42";
 --- config
 location / {
@@ -73,9 +73,9 @@ GET /?a=ratataXXX
 --- error_code: 200
 === TEST 1.2: rule on headers
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -101,9 +101,9 @@ GET /?a=XXX
 --- error_code: 412
 === TEST 1.2: extensive log while targeting name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 location / {
@@ -129,9 +129,9 @@ GET /?ratata=tututu
 --- error_code: 200
 === TEST 1.2: extensive log while targeting name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 location / {
@@ -157,9 +157,9 @@ GET /?ratata=tututu
 --- error_code: 200
 === TEST 1.3: rule on url
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 location / {
@@ -184,9 +184,9 @@ GET /ratata?x=tututu
 --- error_code: 412
 === TEST 1.4: add post action as dynamic flag
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;
@@ -212,10 +212,10 @@ GET /ratata?x=tututu
 --- error_code: 412
 === TEST 1.5.0: HEADER_VAR_X
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4241 "str:ratata" "mz:$HEADERS_VAR_X:ruuu" "s:BLOCK";
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;
@@ -243,10 +243,10 @@ GET /ratata?x=tututu
 --- error_code: 412
 === TEST 1.5.1: HEADER_VAR_X
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4241 "str:ratata" "mz:$HEADERS_VAR_X:ruuu|$URL_X:^/fufu" "s:BLOCK";
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;
@@ -274,10 +274,10 @@ GET /fufu?x=tututu
 --- error_code: 412
 === TEST 1.5.2: HEADER_VAR_X
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4241 "str:ratata" "mz:$HEADERS_VAR_X:ruuu|$URL_X:^/fufu" "s:BLOCK";
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;
@@ -305,10 +305,10 @@ GET /fuf?x=tututu
 --- error_code: 404
 === TEST 1.6.0: URL + URL wl
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4241 "str:ratata" "mz:URL" "s:BLOCK";
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;
@@ -334,10 +334,10 @@ GET /ratata
 --- error_code: 404
 === TEST 1.6.1: URL + URL wl
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4241 "str:ratata" "mz:URL" "s:BLOCK";
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 set $naxsi_extensive_log 1;
 set $naxsi_flag_post_acton 1;

@@ -19,9 +19,9 @@ run_tests();
 __DATA__
 === TEST 1.0: blacklist on static var name (good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratz" "mz:$ARGS_VAR:foo1|$URL:/ff" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:foo" "s:$XSS:8";
 MainRule id:4241 "str:ratz" "mz:$ARGS_VAR:foo1" "s:$XSS:8";
@@ -46,9 +46,9 @@ GET /?foo=ratataXXX
 --- error_code: 412
 === TEST 1.1: blacklist on static var name (bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:foo1/$URL:/zz" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:foo" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:foo/$URL:/zz" "s:$XSS:8";
@@ -73,9 +73,9 @@ GET /?foox=ratataXXX
 --- error_code: 200
 === TEST 2.0: blacklist on rx var name (good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^foa[0-9]+$|$URL_X:/f1" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^foo[0-9]+$" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^foa[0-9]+$|$URL_X:/ff" "s:$XSS:8";
@@ -101,9 +101,9 @@ GET /?foo888=ratataXXX
 --- error_code: 412
 === TEST 2.1: blacklist on rx var name (bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^foo[0-9]+$/$URL_X:/z" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^foo[0-9]+$" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^fo1[0-9]+$" "s:$XSS:8";
@@ -128,9 +128,9 @@ GET /?foob=ratataXXX
 --- error_code: 200
 === TEST 3.0: blacklist on rx var name (bad zone)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$BODY_VAR_X:^foo[0-9]+$|$URL_X:/fz" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$BODY_VAR_X:^foo[0-9]+$" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$BODY_VAR_X:^fo1[0-9]+$" "s:$XSS:8";
@@ -156,9 +156,9 @@ GET /?foo88=ratataXXX
 
 === TEST 3.1: blacklist on static var name (bad zone)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$BODY_VAR:foo|$URL:/f" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$BODY_VAR:foo" "s:$XSS:8";
 --- config
@@ -183,9 +183,9 @@ GET /?foo=ratataXXX
 
 === TEST 4.0: blacklist on multi static var name (one good, many bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL:/zz|$ARGS_VAR:aaa|$ARGS_VAR:foo|$ARGS_VAR:nope" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:aaa|$ARGS_VAR:foo|$ARGS_VAR:nope" "s:$XSS:8";
 --- config
@@ -210,9 +210,9 @@ GET /?foo=ratataXXX
 
 === TEST 4.1: blacklist on multi rx var name (one good, many bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL_X:^/z$|$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^foo$|$ARGS_VAR_X:^nope$" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^foo$|$ARGS_VAR_X:^nope$" "s:$XSS:8";
 --- config
@@ -238,9 +238,9 @@ GET /?foo=ratataXXX
 
 === TEST 5.0: blacklist on multi rx var name (many bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^foo$|$ARGS_VAR_X:^nope$" "s:$XSS:8";
 --- config
 location / {
@@ -265,9 +265,9 @@ GET /?foo1=ratataXXX
 
 === TEST 5.1: blacklist on multi rx var name (many bad, one good zone)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^foo$|$ARGS_VAR_X:^nope$|ARGS" "s:$XSS:8";
 --- config
 location / {
@@ -292,9 +292,9 @@ GET /?foo1=ratataXXX
 
 === TEST 6.0: blacklist on multi static var name (many bad)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:^aaa$|$ARGS_VAR:^foo$|$ARGS_VAR:^nope$" "s:$XSS:8";
 --- config
 location / {
@@ -319,9 +319,9 @@ GET /?foo1=ratataXXX
 
 === TEST 6.1: blacklist on multi static var name (many bad, one good zone)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$ARGS_VAR:^aaa$|$ARGS_VAR:^foo$|$ARGS_VAR:^nope$|ARGS" "s:$XSS:8";
 --- config
 location / {
@@ -345,9 +345,9 @@ GET /?foo1=ratataXXX
 
 === TEST 7.0: static blacklist on $URL:/ | $ARGS_VAR  (both good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL:/fooa|$ARGS_VAR:aaa" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$URL:/foo|$ARGS_VAR:aaa" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$URL:/fooz|$ARGS_VAR:aaa" "s:$XSS:8";
@@ -374,9 +374,9 @@ GET /foo?aaa=ratataXXX
 
 === TEST 7.1: static blacklist on $URL:/ | $ARGS_VAR  (bad url)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL:/foo1|$ARGS_VAR:aaa" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$URL:/foo|$ARGS_VAR:aaa" "s:$XSS:8";
 MainRule id:4241 "str:ratata" "mz:$URL:/foo2|$ARGS_VAR:aaa" "s:$XSS:8";
@@ -404,9 +404,9 @@ GET /foox?aaa=ratataXXX
 
 === TEST 7.2: static blacklist on $URL:/ | $ARGS_VAR  (bad ARGS_VAR)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL:/foo|$ARGS_VAR:aaa" "s:$XSS:8";
 --- config
 location / {
@@ -430,9 +430,9 @@ GET /foo?axaa=ratataXXX
 
 === TEST 7.3: static blacklist on $URL:/ | $ARGS_VAR  (one bad ARGS_VAR and one good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL:/foo|$ARGS_VAR:aaa|$ARGS_VAR:tutu" "s:$XSS:8";
 --- config
 location / {
@@ -457,9 +457,9 @@ GET /foo?tutu=ratataXXX
 
 === TEST 7.0: rx blacklist on $URL_X:/ | $ARGS_VAR_X  (both good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL_X:^/foo$|$ARGS_VAR_X:^aaa[0-9]+$" "s:$XSS:8";
 --- config
 location / {
@@ -484,9 +484,9 @@ GET /foo?aaa4242=ratataXXX
 
 === TEST 7.1: rx blacklist on $URL_X:/ | $ARGS_VAR_X  (bad url)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL_X:^/foo$|$ARGS_VAR_X:^aaa$" "s:$XSS:8";
 --- config
 location / {
@@ -512,9 +512,9 @@ GET /foox?aaa=ratataXXX
 
 === TEST 7.2: rx blacklist on $URL_X:/ | $ARGS_VAR_X  (bad ARGS_VAR)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL_X:^/foo$|$ARGS_VAR_X:^aaa$" "s:$XSS:8";
 --- config
 location / {
@@ -538,9 +538,9 @@ GET /foo?axaa=ratataXXX
 
 === TEST 7.3: static blacklist on $URL:/ | $ARGS_VAR  (one bad ARGS_VAR and one good)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4241 "str:ratata" "mz:$URL_X:^/foo$|$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^tutu$" "s:$XSS:8";
 --- config
 location / {
@@ -565,9 +565,9 @@ GET /foo?tutu=ratataXXX
 
 === TEST 8.0: gni ?
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "mz:$ARGS_VAR_X:^foo.*" "msg:lol" "s:DROP" id:42424242;
 #MainRule id:4241 "str:ratata" "mz:$URL_X:^/foo$|$ARGS_VAR_X:^aaa$|$ARGS_VAR_X:^tutu$" "s:$XSS:8";
 --- config

@@ -16,9 +16,9 @@ run_tests();
 __DATA__
 === WL TEST 1.0: [ARGS zone WhiteList] Adding a test rule in http_config (ARGS zone) and disable rule.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -41,9 +41,9 @@ GET /?a=foobar
 --- error_code: 200
 === WL TEST 1.0.1: [ARGS zone WhiteList] Adding a test rule in http_config (ARGS zone) and disable rule.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -66,9 +66,9 @@ GET /?foobar=a
 --- error_code: 200
 === WL TEST 1.1: Adding a test rule in http_config (ARGS zone) and WL it on arg name only.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -91,9 +91,9 @@ GET /?a=foobar
 --- error_code: 200
 === WL TEST 1.2: Adding a test rule in http_config (ARGS zone) and WL it on arg name only (case sensitiveness check).
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -116,9 +116,9 @@ GET /?abcd=foobar
 --- error_code: 200
 === WL TEST 1.3: Adding a test rule in http_config (ARGS zone) and WL it on arg name only (case sensitiveness check #2).
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -141,9 +141,9 @@ GET /?AbCd=foobar
 --- error_code: 200
 === WL TEST 1.4: Adding a test rule in http_config (ARGS zone) and WL it on $URL + ZONE.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -169,9 +169,9 @@ GET /?a=foobar
 >>> index2
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -197,9 +197,9 @@ GET /index2?a=foobar
 >>> index2
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -222,9 +222,9 @@ GET /index2?ABCD=foobar
 --- error_code: 412
 === WL TEST 2.0: Adding a rule that will match on headers
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -248,9 +248,9 @@ GET /
 --- error_code: 412
 === WL TEST 2.1: Adding a rule that will match on headers, WL it on $HEADERS_VAR
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -278,9 +278,9 @@ GET /another-page
 --- error_code: 200
 === WL TEST 2.2: Adding a rule that will match on headers specific header name
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:$HEADERS_VAR:cookie" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -307,9 +307,9 @@ GET /another-page
 --- error_code: 412
 === WL TEST 2.3: Adding a rule that will match on headers, WL it by $URL + zone
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -337,9 +337,9 @@ GET /another-page
 --- error_code: 200
 === WL TEST 2.4 : Adding a rule that will match on headers, WL it by $URL + $HEADERS_VAR
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -367,9 +367,9 @@ GET /another-page
 --- error_code: 200
 === WL TEST 2.5 : Adding a rule that will match on headers, WL it by $URL + $HEADERS_VAR (WRONG URL)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -397,9 +397,9 @@ GET /another-pag
 --- error_code: 412
 === WL TEST 2.6 : Adding a rule that will match on headers, WL it by $URL + $HEADERS_VAR (WRONG HEADER NAME)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:HEADERS" "s:$SQL:42" id:1999;
 --- user_files
 >>> another-page
@@ -430,9 +430,9 @@ GET /another-page
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:bra" "msg:test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -457,9 +457,9 @@ GET /foobar?a=BrA
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:BrA" "msg:test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -484,9 +484,9 @@ GET /foobar?a=bRa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:BrA" "msg:test pattern" "mz:$URL:/foobar|ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -511,9 +511,9 @@ GET /FoObar?a=bRa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:multipart/form-data|application/x-www-form-urlencoded" "msg:Content is neither mulipart/x-www-form.." "mz:$HEADERS_VAR:Content-typz" "s:BLOCK" id:1402;
 --- config
 location / {
@@ -544,9 +544,9 @@ foo1=bar1&foo2=bar2"
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:multipart/form-data|application/x-www-form-urlencoded" "msg:Content is neither mulipart/x-www-form.." "mz:$HEADERS_VAR:content-typz" "s:BLOCK" id:1999;
 --- config
 location / {
@@ -577,9 +577,9 @@ foo1=bar1&foo2=bar2"
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule negative "rx:multipart/form-data|application/x-www-form-urlencoded" "msg:Content is neither mulipart/x-www-form.." "mz:$HEADERS_VAR:content-typz" "s:BLOCK" id:1999;
 --- config
 location / {
@@ -610,9 +610,9 @@ foo1=bar1&foo2=bar2"
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -635,9 +635,9 @@ GET /foobar?baron=foobar
 --- error_code: 412
 === WL TEST 6: Adding a test rule in http_config (ARGS zone) and WL it.
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -663,9 +663,9 @@ GET /?a=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -691,9 +691,9 @@ GET /foobar?aa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -718,9 +718,9 @@ GET /foobar?aa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -746,9 +746,9 @@ GET /foobar?aa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:URL" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -774,9 +774,9 @@ GET /foobar?aa
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -802,9 +802,9 @@ GET /foobar?barone=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -830,9 +830,9 @@ GET /foobar?barone=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -858,9 +858,9 @@ GET /foobar?baron=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -886,9 +886,9 @@ GET /foobarx?baron=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:foobar" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:42" id:1999;
 --- config
 location / {
@@ -914,9 +914,9 @@ GET /foobar?baron=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1999;
 MainRule "str:yestwo" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1998;
 --- config
@@ -942,9 +942,9 @@ GET /?a=yesone&b=yestwo
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1999;
 --- config
 location / {
@@ -970,9 +970,9 @@ GET /?b=yestwo
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:BLOCK" id:1999;
 --- config
 location / {
@@ -998,9 +998,9 @@ GET /?b=yesone
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1999;
 MainRule "str:yestwo" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1998;
 --- config
@@ -1027,9 +1027,9 @@ GET /?a=yesone&b=yestwo
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1999;
 MainRule "str:yestwo" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1998;
 --- config
@@ -1056,9 +1056,9 @@ GET /?a=yesoneyestwo
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule "str:yesone" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1999;
 MainRule "str:yestwo" "msg:foobar test pattern" "mz:ARGS" "s:$SQL:4" id:1998;
 --- config
@@ -1085,9 +1085,9 @@ GET /?a=yesoneyestwo
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -1113,9 +1113,9 @@ POST /
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -1142,10 +1142,10 @@ POST /
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
 MainRule id:4242 "str:123" "mz:ARGS" s:BLOCK;
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 #LearningMode;
@@ -1169,9 +1169,9 @@ GET /?a123a=foobar
 >>> foobar
 eh yo
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4242 "str:123" "mz:ARGS" s:BLOCK;
 --- config
 location / {
@@ -1194,9 +1194,9 @@ GET /?a123a=lol
 --- error_code: 200
 === WL TEST 20.0 : wl:0 in cookies (#405)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4242 "str:123" "mz:$HEADERS_VAR:cookie" s:BLOCK;
 --- config
 location / {
@@ -1219,9 +1219,9 @@ GET /
 --- error_code: 412
 === WL TEST 20.1 : wl:0 in cookies (#405)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4242 "str:123" "mz:$HEADERS_VAR:cookie" s:BLOCK;
 --- config
 location / {
@@ -1244,9 +1244,9 @@ GET /
 --- error_code: 200
 === WL TEST 20.0 : wl:0 in cookies (#405)
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 MainRule id:4242 "str:123" "mz:$HEADERS_VAR:cookie" s:BLOCK;
 --- config
 location / {

@@ -20,9 +20,9 @@ run_tests();
 __DATA__
 === TEST 2.0: utf8 overlong
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -49,9 +49,9 @@ ww=%2F%C0%AE%2E%2F&foo2=bar2"
 --- error_code: 412
 === TEST 2.1: utf8 overlong
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
@@ -78,9 +78,9 @@ ww=%c0%80"
 --- error_code: 412
 === TEST 2.2: valid utf8
 --- main_config
-load_module /tmp/naxsi_ut/modules/ngx_http_naxsi_module.so;
+load_module /etc/nginx/modules/ngx_http_naxsi_module.so;
 --- http_config
-include /tmp/naxsi_ut/naxsi_core.rules;
+include /etc/nginx/naxsi_core.rules;
 --- config
 location / {
 	 SecRulesEnabled;
