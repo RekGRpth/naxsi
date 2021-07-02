@@ -14,25 +14,25 @@
 ** code to parse FLAGS and OPTIONS on each line.
 */
 void*
-naxsi_id(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_id(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_score(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_msg(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_msg(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_rx(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_rx(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_zone(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_str(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_str(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_negative(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_negative(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_libinj_xss(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_libinj_xss(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_libinj_sql(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_libinj_sql(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 void*
-naxsi_whitelist(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule);
+naxsi_whitelist(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule);
 
 /*
 ** Structures related to the configuration parser
@@ -61,28 +61,28 @@ static ngx_http_naxsi_parser_t rule_parser[] = {
 };
 
 void*
-naxsi_negative(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_negative(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   rule->br->negative = 1;
   return (NGX_CONF_OK);
 }
 
 void*
-naxsi_libinj_xss(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_libinj_xss(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   rule->br->match_type = LIBINJ_XSS;
   return (NGX_CONF_OK);
 }
 
 void*
-naxsi_libinj_sql(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_libinj_sql(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   rule->br->match_type = LIBINJ_SQL;
   return (NGX_CONF_OK);
 }
 
 void*
-naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_score(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   int                       score, len;
   char *                    tmp_ptr, *tmp_end;
@@ -93,16 +93,16 @@ naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
   rule->allow = 0;
   rule->drop  = 0;
   tmp_ptr     = (char*)(tmp->data + strlen(SCORE_T));
-  NX_LOG_DEBUG(_debug_score, NGX_LOG_EMERG, r, 0, "XX-(debug) dummy score (%V)", tmp);
+  NX_LOG_DEBUG(_debug_score, NGX_LOG_EMERG, cf, 0, "XX-(debug) dummy score (%V)", tmp);
   /*allocate scores array*/
   if (!rule->sscores) {
-    rule->sscores = ngx_array_create(r->pool, 1, sizeof(ngx_http_special_score_t));
+    rule->sscores = ngx_array_create(cf->pool, 1, sizeof(ngx_http_special_score_t));
   }
 
   while (*tmp_ptr) {
     if (tmp_ptr[0] == '$') {
       NX_LOG_DEBUG(
-        _debug_score, NGX_LOG_EMERG, r, 0, "XX-(debug) special scoring rule (%s)", tmp_ptr);
+        _debug_score, NGX_LOG_EMERG, cf, 0, "XX-(debug) special scoring rule (%s)", tmp_ptr);
 
       return_value_if(!(tmp_end = strchr(tmp_ptr, ':')), NGX_CONF_ERROR);
 
@@ -110,16 +110,16 @@ naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 
       return_value_if(!(sc = ngx_array_push(rule->sscores)), NGX_CONF_ERROR);
 
-      return_value_if(!(sc->sc_tag = ngx_pcalloc(r->pool, sizeof(ngx_str_t))), NGX_CONF_ERROR);
+      return_value_if(!(sc->sc_tag = ngx_pcalloc(cf->pool, sizeof(ngx_str_t))), NGX_CONF_ERROR);
 
-      return_value_if(!(sc->sc_tag->data = ngx_pcalloc(r->pool, len + 1)), NGX_CONF_ERROR);
+      return_value_if(!(sc->sc_tag->data = ngx_pcalloc(cf->pool, len + 1)), NGX_CONF_ERROR);
 
       memcpy(sc->sc_tag->data, tmp_ptr, len);
       sc->sc_tag->len = len;
       sc->sc_score    = atoi(tmp_end + 1);
       NX_LOG_DEBUG(_debug_score,
                    NGX_LOG_EMERG,
-                   r,
+                   cf,
                    0,
                    "XX-(debug) special scoring (%V) => (%d)",
                    sc->sc_tag,
@@ -162,7 +162,7 @@ naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
   if (rule->sscores) {
     for (z = 0; z < rule->sscores->nelts; z++) {
       ngx_conf_log_error(NGX_LOG_EMERG,
-                         r,
+                         cf,
                          0,
                          "XX-score n°%d special scoring (%V) => (%d)",
                          z,
@@ -170,13 +170,13 @@ naxsi_score(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
                          scr[z].sc_score);
     }
   } else
-    ngx_conf_log_error(NGX_LOG_EMERG, r, 0, "XX-no custom scores for this rule.");
+    ngx_conf_log_error(NGX_LOG_EMERG, cf, 0, "XX-no custom scores for this rule.");
 #endif
   return (NGX_CONF_OK);
 }
 
 void*
-naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_zone(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   int                              tmp_len, has_zone = 0;
   ngx_http_custom_rule_location_t* custom_rule;
@@ -242,7 +242,7 @@ naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
       rule->br->custom_location = 1;
       if (!rule->br->custom_locations) {
         rule->br->custom_locations =
-          ngx_array_create(r->pool, 1, sizeof(ngx_http_custom_rule_location_t));
+          ngx_array_create(cf->pool, 1, sizeof(ngx_http_custom_rule_location_t));
 
         return_value_if(!rule->br->custom_locations, NGX_CONF_ERROR);
       }
@@ -310,7 +310,7 @@ naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
       tmp_len = tmp_end - tmp_ptr;
       return_value_if(tmp_len <= 0, NGX_CONF_ERROR);
 
-      custom_rule->target.data = ngx_pcalloc(r->pool, tmp_len + 1);
+      custom_rule->target.data = ngx_pcalloc(cf->pool, tmp_len + 1);
       return_value_if(!custom_rule->target.data, NGX_CONF_ERROR);
 
       custom_rule->target.len = tmp_len;
@@ -320,23 +320,23 @@ naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
       */
       if (rule->br->rx_mz == 1) {
 
-        custom_rule->target_rx = ngx_pcalloc(r->pool, sizeof(ngx_regex_compile_t));
+        custom_rule->target_rx = ngx_pcalloc(cf->pool, sizeof(ngx_regex_compile_t));
         return_value_if(!custom_rule->target_rx, NGX_CONF_ERROR);
 
         custom_rule->target_rx->options  = PCRE_CASELESS | PCRE_MULTILINE;
         custom_rule->target_rx->pattern  = custom_rule->target;
-        custom_rule->target_rx->pool     = r->pool;
+        custom_rule->target_rx->pool     = cf->pool;
         custom_rule->target_rx->err.len  = 0;
         custom_rule->target_rx->err.data = NULL;
 
         if (ngx_regex_compile(custom_rule->target_rx) != NGX_OK) {
-          NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, r, 0, "XX-FAILED RX:%V", custom_rule->target);
+          NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, cf, 0, "XX-FAILED RX:%V", custom_rule->target);
           return (NGX_CONF_ERROR);
         }
       }
       custom_rule->hash = ngx_hash_key_lc(custom_rule->target.data, custom_rule->target.len);
 
-      NX_LOG_DEBUG(_debug_zone, NGX_LOG_EMERG, r, 0, "XX- ZONE:[%V]", &(custom_rule->target));
+      NX_LOG_DEBUG(_debug_zone, NGX_LOG_EMERG, cf, 0, "XX- ZONE:[%V]", &(custom_rule->target));
       tmp_ptr += tmp_len;
       continue;
     } else {
@@ -347,7 +347,7 @@ naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
   ** ensure the match-zone actually returns a zone :)
   */
   if (has_zone == 0) {
-    ngx_conf_log_error(NGX_LOG_EMERG, r, 0, "matchzone doesn't target an actual zone.");
+    ngx_conf_log_error(NGX_LOG_EMERG, cf, 0, "matchzone doesn't target an actual zone.");
     return (NGX_CONF_ERROR);
   }
 
@@ -355,14 +355,14 @@ naxsi_zone(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 }
 
 void*
-naxsi_id(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_id(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   rule->rule_id = atoi((const char*)tmp->data + strlen(ID_T));
   return (NGX_CONF_OK);
 }
 
 void*
-naxsi_str(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_str(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   ngx_str_t* str;
   uint       i;
@@ -371,7 +371,7 @@ naxsi_str(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 
   rule->br->match_type = STR;
 
-  return_value_if(!(str = ngx_pcalloc(r->pool, sizeof(ngx_str_t))), NGX_CONF_ERROR);
+  return_value_if(!(str = ngx_pcalloc(cf->pool, sizeof(ngx_str_t))), NGX_CONF_ERROR);
 
   str->data = tmp->data + strlen(STR_T);
   str->len  = tmp->len - strlen(STR_T);
@@ -383,12 +383,12 @@ naxsi_str(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 }
 
 void*
-naxsi_msg(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_msg(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   ngx_str_t* str;
   return_value_if(!rule->br, NGX_CONF_ERROR);
 
-  str = ngx_pcalloc(r->pool, sizeof(ngx_str_t));
+  str = ngx_pcalloc(cf->pool, sizeof(ngx_str_t));
   return_value_if(!str, NGX_CONF_ERROR);
 
   str->data     = tmp->data + strlen(STR_T);
@@ -398,7 +398,7 @@ naxsi_msg(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 }
 
 void*
-naxsi_whitelist(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_whitelist(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
 
   ngx_array_t* wl_ar;
@@ -413,10 +413,10 @@ naxsi_whitelist(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
       ct++;
     }
   }
-  wl_ar = ngx_array_create(r->pool, ct, sizeof(ngx_int_t));
+  wl_ar = ngx_array_create(cf->pool, ct, sizeof(ngx_int_t));
   return_value_if(!wl_ar, NGX_CONF_ERROR);
 
-  NX_LOG_DEBUG(_debug_whitelist, NGX_LOG_EMERG, r, 0, "XX- allocated %d elems for WL", ct);
+  NX_LOG_DEBUG(_debug_whitelist, NGX_LOG_EMERG, cf, 0, "XX- allocated %d elems for WL", ct);
   for (i = 0; i < str.len; i++) {
     if (i == 0 || str.data[i - 1] == ',') {
       id = (ngx_int_t*)ngx_array_push(wl_ar);
@@ -429,7 +429,7 @@ naxsi_whitelist(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
 }
 
 void*
-naxsi_rx(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
+naxsi_rx(ngx_conf_t* cf, ngx_str_t* tmp, ngx_http_rule_t* rule)
 {
   ngx_regex_compile_t* rgc;
   ngx_str_t            ha;
@@ -440,20 +440,20 @@ naxsi_rx(ngx_conf_t* r, ngx_str_t* tmp, ngx_http_rule_t* rule)
   // just prepare a string to hold the directive without 'rx:'
   ha.data = tmp->data + strlen(RX_T);
   ha.len  = tmp->len - strlen(RX_T);
-  rgc     = ngx_pcalloc(r->pool, sizeof(ngx_regex_compile_t));
+  rgc     = ngx_pcalloc(cf->pool, sizeof(ngx_regex_compile_t));
   return_value_if(!rgc, NGX_CONF_ERROR);
   rgc->options  = PCRE_CASELESS | PCRE_MULTILINE;
   rgc->pattern  = ha;
-  rgc->pool     = r->pool;
+  rgc->pool     = cf->pool;
   rgc->err.len  = 0;
   rgc->err.data = NULL;
 
   if (ngx_regex_compile(rgc) != NGX_OK) {
-    NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, r, 0, "XX-FAILED RX:%V", tmp);
+    NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, cf, 0, "XX-FAILED RX:%V", tmp);
     return (NGX_CONF_ERROR);
   }
   rule->br->rx = rgc;
-  NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, r, 0, "XX- RX:[%V]", &(rule->br->rx->pattern));
+  NX_LOG_DEBUG(_debug_rx, NGX_LOG_EMERG, cf, 0, "XX- RX:[%V]", &(rule->br->rx->pattern));
   return (NGX_CONF_OK);
 }
 
