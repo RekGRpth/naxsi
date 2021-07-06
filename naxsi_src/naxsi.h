@@ -9,8 +9,8 @@
 
 #define NAXSI_VERSION "1.3"
 
-#include "ext/libinjection/libinjection_sqli.h"
-#include "ext/libinjection/libinjection_xss.h"
+#include "libinjection/src/libinjection_sqli.h"
+#include "libinjection/src/libinjection_xss.h"
 #include <ctype.h>
 #include <nginx.h>
 #include <ngx_config.h>
