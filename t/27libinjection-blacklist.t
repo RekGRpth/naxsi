@@ -36,7 +36,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /?ruuu=a' onmouseover='alert(1) HTTP/1.0
+"GET /?ruuu=a'%20onmouseover='alert(1) HTTP/1.0
 
 "
 --- error_code: 412
@@ -58,7 +58,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /?ruuu=a' onmouseover='alert(1) HTTP/1.0
+"GET /?ruuu=a'%20onmouseover='alert(1) HTTP/1.0
 
 "
 --- error_code: 200
@@ -80,7 +80,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /?ruuu=a' onmouseover='alert(1) HTTP/1.0
+"GET /?ruuu=a'%20onmouseover='alert(1) HTTP/1.0
 
 "
 --- error_code: 200
@@ -103,7 +103,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /?fuu4242424=a' onmouseover='alert(1) HTTP/1.0
+"GET /?fuu4242424=a'%20onmouseover='alert(1) HTTP/1.0
 
 "
 --- error_code: 412
@@ -127,7 +127,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /foobar/?fuu4242424=1' OR '1'='1 HTTP/1.0
+"GET /foobar/?fuu4242424=1'%20OR%20'1'='1 HTTP/1.0
 
 "
 --- error_code: 412
@@ -150,7 +150,7 @@ location /RequestDenied {
          return 412;
 }
 --- raw_request eval
-"GET /foobar/?fuu4242424=1' OR \"1\"= HTTP/1.0
+"GET /foobar/?fuu4242424=1'%20OR%20\"1\"= HTTP/1.0
 
 "
 --- error_code: 404
