@@ -115,6 +115,22 @@ static ngx_command_t ngx_http_naxsi_commands[] = {
     0,
     NULL },
 
+  /* DeniedError */
+  { ngx_string(TOP_DENIED_ERROR_T),
+    NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_1MORE,
+    ngx_http_naxsi_ud_loc_conf,
+    NGX_HTTP_LOC_CONF_OFFSET,
+    0,
+    NULL },
+
+  /* DeniedError - nginx style */
+  { ngx_string(TOP_DENIED_ERROR_N),
+    NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_1MORE,
+    ngx_http_naxsi_ud_loc_conf,
+    NGX_HTTP_LOC_CONF_OFFSET,
+    0,
+    NULL },
+
   /* WhitelistIP */
   { ngx_string(TOP_IGNORE_IP_T),
     NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_1MORE,
@@ -370,6 +386,10 @@ ngx_http_naxsi_merge_loc_conf(ngx_conf_t* cf, void* parent, void* child)
     conf->libinjection_xss_enabled = prev->libinjection_xss_enabled;
   if (conf->denied_url == NULL)
     conf->denied_url = prev->denied_url;
+  if (conf->denied_error == 0)
+    conf->denied_error = prev->denied_error;
+  if (conf->denied_error == 0)
+    conf->denied_error = NGX_HTTP_FORBIDDEN;
   if (conf->flag_enable_h == 0)
     conf->flag_enable_h = prev->flag_enable_h;
   if (conf->flag_learning_h == 0)
@@ -418,13 +438,6 @@ ngx_http_naxsi_init(ngx_conf_t* cf)
   loc_cf = main_cf->locations->elts;
 
   for (i = 0; i < main_cf->locations->nelts; i++) {
-    if (loc_cf[i]->enabled && (!loc_cf[i]->denied_url || loc_cf[i]->denied_url->len <= 0)) {
-      /* LCOV_EXCL_START */
-      ngx_conf_log_error(NGX_LOG_EMERG, cf, 0, "Missing DeniedURL, abort.");
-      return (NGX_ERROR);
-      /* LCOV_EXCL_STOP */
-    }
-
     loc_cf[i]->flag_enable_h   = ngx_hash_key_lc((u_char*)RT_ENABLE, strlen(RT_ENABLE));
     loc_cf[i]->flag_learning_h = ngx_hash_key_lc((u_char*)RT_LEARNING, strlen(RT_LEARNING));
     loc_cf[i]->flag_post_action_h =
@@ -887,6 +900,24 @@ ngx_http_naxsi_ud_loc_conf(ngx_conf_t* cf, ngx_command_t* cmd, void* conf)
       return (NGX_CONF_ERROR); /* LCOV_EXCL_LINE */
     memcpy(alcf->denied_url->data, value[1].data, value[1].len);
     alcf->denied_url->len = value[1].len;
+    return (NGX_CONF_OK);
+  }
+  /* store denied ERROR for location */
+  else if ((!ngx_strcmp(value[0].data, TOP_DENIED_ERROR_N) ||
+       !ngx_strcmp(value[0].data, TOP_DENIED_ERROR_T)) &&
+      value[1].len) {
+
+    alcf->denied_error = ngx_atoi(value[1].data, value[1].len);
+
+    if (alcf->denied_error == NGX_ERROR || alcf->denied_error == 499) {
+      ngx_conf_log_error(NGX_LOG_EMERG, cf, 0, "invalid value \"%V\"", &value[1]);
+      return (NGX_CONF_ERROR); /* LCOV_EXCL_LINE */
+    }
+
+    if (alcf->denied_error < 300 || alcf->denied_error > 599) {
+      ngx_conf_log_error(NGX_LOG_EMERG, cf, 0, "value \"%V\" must be between 300 and 599", &value[1]);
+      return (NGX_CONF_ERROR); /* LCOV_EXCL_LINE */
+    }
     return (NGX_CONF_OK);
   }
 

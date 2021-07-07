@@ -376,6 +376,7 @@ typedef struct
   ngx_flag_t   libinjection_sql_enabled : 1;
   ngx_flag_t   libinjection_xss_enabled : 1;
   ngx_str_t*   denied_url;
+  ngx_int_t    denied_error;
   /* precomputed hash for dynamic variable lookup,
      variable themselves are boolean */
   ngx_uint_t flag_enable_h;
@@ -461,6 +462,7 @@ typedef struct ngx_http_nx_json_s
 } ngx_json_t;
 
 #define TOP_DENIED_URL_T       "DeniedUrl"
+#define TOP_DENIED_ERROR_T     "DeniedError"
 #define TOP_IGNORE_IP_T        "IgnoreIP"
 #define TOP_IGNORE_CIDR_T      "IgnoreCIDR"
 #define TOP_LEARNING_FLAG_T    "LearningMode"
@@ -475,6 +477,7 @@ typedef struct ngx_http_nx_json_s
 
 /* nginx-style names */
 #define TOP_DENIED_URL_N       "denied_url"
+#define TOP_DENIED_ERROR_N     "denied_error"
 #define TOP_IGNORE_IP_N        "ignore_ip"
 #define TOP_IGNORE_CIDR_N      "ignore_cidr"
 #define TOP_LEARNING_FLAG_N    "learning_mode"

@@ -1444,7 +1444,7 @@ ngx_http_output_forbidden_page(ngx_http_request_ctx_t* ctx, ngx_http_request_t* 
   }
 
   if (ctx->learning && !ctx->drop) {
-    if (ctx->post_action) {
+    if (ctx->post_action && cf->denied_url != NULL) {
       ngx_http_core_loc_conf_t* clcf;
       clcf                   = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
       clcf->post_action.data = cf->denied_url->data;
@@ -1452,6 +1452,8 @@ ngx_http_output_forbidden_page(ngx_http_request_ctx_t* ctx, ngx_http_request_t* 
     }
     return (NGX_DECLINED);
   } else {
+    if (cf->denied_url == NULL)
+      return cf->denied_error;
     ngx_http_internal_redirect(r, cf->denied_url, &empty);
     return (NGX_HTTP_OK);
   }
