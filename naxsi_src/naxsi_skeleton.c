@@ -182,6 +182,22 @@ static ngx_command_t ngx_http_naxsi_commands[] = {
     0,
     NULL },
 
+  /* Blocking Flag */
+  { ngx_string(TOP_BLOCKING_FLAG_T),
+    NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_NOARGS,
+    ngx_http_naxsi_flags_loc_conf,
+    NGX_HTTP_LOC_CONF_OFFSET,
+    0,
+    NULL },
+
+  /* Blocking Flag (nginx style) */
+  { ngx_string(TOP_BLOCKING_FLAG_N),
+    NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_NOARGS,
+    ngx_http_naxsi_flags_loc_conf,
+    NGX_HTTP_LOC_CONF_OFFSET,
+    0,
+    NULL },
+
   /* EnableFlag */
   { ngx_string(TOP_ENABLED_FLAG_T),
     NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_HTTP_LMT_CONF | NGX_CONF_NOARGS,
@@ -374,6 +390,8 @@ ngx_http_naxsi_merge_loc_conf(ngx_conf_t* cf, void* parent, void* child)
     conf->extensive = prev->extensive;
   if (conf->learning == 0)
     conf->learning = prev->learning;
+  if (conf->force_blocking == 0)
+    conf->force_blocking = prev->force_blocking;
   if (conf->enabled == 0)
     conf->enabled = prev->enabled;
   if (conf->force_disabled == 0)
@@ -963,6 +981,12 @@ ngx_http_naxsi_flags_loc_conf(ngx_conf_t* cf, ngx_command_t* cmd, void* conf)
         !ngx_strcmp(value[0].data, TOP_LEARNING_FLAG_N)) {
     alcf->learning = 1;
     return (NGX_CONF_OK);
+  } else
+    /* it's a flagrule, currently just a hack to enable/disable learning mode */
+    if (!ngx_strcmp(value[0].data, TOP_BLOCKING_FLAG_T) ||
+        !ngx_strcmp(value[0].data, TOP_BLOCKING_FLAG_N)) {
+    alcf->force_blocking = 1;
+    return (NGX_CONF_OK);
   } else if (!ngx_strcmp(value[0].data, TOP_LIBINJECTION_SQL_T) ||
              !ngx_strcmp(value[0].data, TOP_LIBINJECTION_SQL_N)) {
     NX_LOG_DEBUG(_debug_loc_conf, NGX_LOG_EMERG, cf, 0, "LibInjectionSql enabled");
@@ -1192,6 +1216,7 @@ ngx_http_naxsi_access_handler(ngx_http_request_t* r)
     /* it seems that nginx will - in some cases -
      have a variable with empty content but with lookup->not_found set to 0,
     so check len as well */
+    if (cf->force_blocking == 0)
     ctx->learning = cf->learning;
 
     lookup = ngx_http_get_variable(r, &learning_flag, cf->flag_learning_h);

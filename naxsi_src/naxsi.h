@@ -370,6 +370,7 @@ typedef struct
   ngx_array_t* persistant_data;
   ngx_flag_t   extensive : 1;
   ngx_flag_t   learning : 1;
+  ngx_flag_t   force_blocking : 1;
   ngx_flag_t   enabled : 1;
   ngx_flag_t   force_disabled : 1;
   ngx_flag_t   pushed : 1;
@@ -466,6 +467,7 @@ typedef struct ngx_http_nx_json_s
 #define TOP_IGNORE_IP_T        "IgnoreIP"
 #define TOP_IGNORE_CIDR_T      "IgnoreCIDR"
 #define TOP_LEARNING_FLAG_T    "LearningMode"
+#define TOP_BLOCKING_FLAG_T    "BlockingMode"
 #define TOP_ENABLED_FLAG_T     "SecRulesEnabled"
 #define TOP_DISABLED_FLAG_T    "SecRulesDisabled"
 #define TOP_CHECK_RULE_T       "CheckRule"
@@ -481,6 +483,7 @@ typedef struct ngx_http_nx_json_s
 #define TOP_IGNORE_IP_N        "ignore_ip"
 #define TOP_IGNORE_CIDR_N      "ignore_cidr"
 #define TOP_LEARNING_FLAG_N    "learning_mode"
+#define TOP_BLOCKING_FLAG_N    "blocking_mode"
 #define TOP_ENABLED_FLAG_N     "rules_enabled"
 #define TOP_DISABLED_FLAG_N    "rules_disabled"
 #define TOP_CHECK_RULE_N       "check_rule"
