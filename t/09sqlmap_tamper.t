@@ -94,7 +94,7 @@ location /RequestDenied {
 	 return 412;
 }
 --- raw_request eval
-"GET /?a=AND+1=1%00 Union select 1 HTTP/1.0
+"GET /?a=AND+1=1%00%20Union%20select%201 HTTP/1.0
 
 "
 --- error_code: 412
@@ -484,7 +484,7 @@ location /RequestDenied {
 	 return 412;
 }
 --- raw_request eval
-"GET /?a=1 UnioN SeLEct 1 HTTP/1.0
+"GET /?a=1%20UnioN%20SeLEct%201 HTTP/1.0
 
 "
 --- error_code: 412
